@@ -15,6 +15,7 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('./assets'));
+app.use(express.urlencoded({extended:false}));
 
 //configuring MongoDb
 const mongoose = require('mongoose');
@@ -30,6 +31,7 @@ db.once('open', function(){
 
 // use express router which is a middleware
 app.use('/', require('./routes/index'));
+app.use('/authors', require('./routes/authors'));
 
 app.listen(port, function(err){
     if(err){
